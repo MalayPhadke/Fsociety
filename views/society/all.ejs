@@ -1,0 +1,18 @@
+<% layout('layouts/main')%>
+<h1>All Societies</h1>
+<% for (let soc of all){%>
+    <div class="card mb-3" >
+        <div class="row">
+            <div class="col-md-4"> 
+                <img class="img-fluid" alt="" src="<%=soc.headImages%>">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%= soc.title %> </h5>
+                    <a href="/society/<%= soc._id %> " class="card-text">View <%= soc.title %></a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }%>

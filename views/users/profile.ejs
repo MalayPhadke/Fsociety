@@ -1,0 +1,30 @@
+<% layout('layouts/main')%>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="card-title"><%= user.username %></h3>
+            <h6 class="card-text text-muted"><%= user.email %></h6>
+            <h6 class="card-text">Your requests:</h6>
+            <% for (let request of reqs) { %>
+                <%= request.username %> wants to be your friend!
+                <form action="/profile/<%= request._id %>/accept?_method=PUT" method="post" class="form-control">
+                    <button class="btn btn-success">Accept</button>
+                </form>
+            <% } %>  
+
+            <h6 class="card-text">Your Friends:</h6>
+            <% for (let friend of friends) { %>
+                <%= friend.username %> 
+            <% } %>  
+        </div>
+        <div class="card-body">
+            <form action="/profile" method="get" class="form-control">
+                <input type="text" name="search" placeholder="Search User" class="">
+                <input type="submit" value="search" class="btn btn-primary">
+            </form>
+        </div>
+        <ul>
+        <% for (let u of users) { %>
+            <a href="/profile/<%= u._id %>"><li><%= u.username %></li></a>
+        <% } %> 
+        </ul>
+    </div>

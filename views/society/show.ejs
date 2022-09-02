@@ -1,0 +1,85 @@
+<% layout('layouts/main') %> 
+<div class="row">
+    <div class="col-6">
+        <div class="card-body">
+            <h2 class="card-title"><%= soc.title %></h2>
+            <p class="card-text">
+                <%= soc.description %>
+            </p>
+            <div class="card-footer">
+                <p>
+                    <% if (soc.members.length === 0){ %>
+                        No members found!
+                    <% } else { %>  
+                        <div class="members">
+                            Total Members: <%= soc.members.length %><br> 
+                            <!-- <%  for (let m of soc.members){ %> 
+                                <%= m.username %> 
+                            <button class="btn btn-primary" onclick="show()">Show members</button> 
+                            <% } %>  -->
+                        </div>
+                    <% } %> 
+                </p>
+        </div>
+        <% if(soc.mod === currentUser._id) {%> 
+            <h3>Settings</h3>
+        <% } else { %> 
+        <% if (!isMember) { %> 
+            <div class="card-link">
+                <form action="/society/<%= soc._id %>/join?_method=PUT" method="post" class="validate-form">
+                    <button class="btn btn-success">Join Society</button>
+                </form>
+            </div>
+        <% } else { %> 
+            <form action="/society/<%= soc._id %>/leave?_method=PUT" method="post" class="validate-form" class="card-link">
+                <button class="btn btn-danger">Leave Society</button>
+            </form>
+            <a class="card-link btn btn-primary" href="/<%= soc._id %>/post/new">Add new Post</a>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                   Sort Posts
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="/society/<%= soc._id %>/trending">Trending Posts</a></li>
+                  <li><a class="dropdown-item" href="/society/<%= soc._id %>/recent">Recent Posts</a></li>
+                  <li><a class="dropdown-item" href="#">Best</a></li>
+                </ul>
+              </div>
+            <% for (let post of soc.posts) { %> 
+                <div class="col-md-6">
+                    <h3 class="card-title"><%= post.postedBy.username %></h3>
+                    <div class="card-text">
+                        <h5><%= post.subject %></h5>
+                        <p><%= post.textContent %></p>
+                    </div>
+                    <div class="card-link">
+                        <form action="/<%= soc._id %>/post/<%= post._id %>/like?_method=PUT" method="post" class="validate-form">
+                            <small class="text-muted"><%= post.likes.length %></small>
+                            <button class="btn btn-success" id="like">Like</button>
+                        </form>
+                    </div>
+                </div>
+
+                <% if (currentUser && post.postedBy.equals(currentUser._id)) { %>
+                    <form action="/<%= post._id %>/delete?_method=DELETE" method="post" class="form-control">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                <% } %>  
+                <% } %>       
+        <% } %> 
+        <% } %> 
+    </div>
+</div>
+
+<script>
+function show(){
+    for (let m of soc.members){
+    document.getElementById("members").innerHTML = `<p>${m.username}</p>`;
+    }
+}
+</script>
+<script type="text/javascript">
+    function disableButton(btn) {
+        document.getElementById(btn.id).disabled = true;
+    }
+</script>

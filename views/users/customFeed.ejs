@@ -1,0 +1,11 @@
+<% layout('layouts/main')%>
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="card-body">
+                <h4>User Societies</h4>
+                    <% for (let soc of userSocieties) { %> 
+                    <a href="/society/<%= soc._id%>" class="card-link"><%= soc.title %></a>
+                    <% } %>
+            </div>
+        </div>
+    </div>

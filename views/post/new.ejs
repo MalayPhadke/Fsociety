@@ -1,0 +1,23 @@
+<% layout('layouts/main')%>
+<div class="col-6 offset-3">
+    <h3>Create New Post</h3>
+    <form action="/<%= id %>/post/new" method="post" class="validate-form" novalidate>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Enter Title:</label>
+            <input class="form-control" type="text" id="subject" name="post[subject]" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+        </div>
+        <div class="mb-3">
+            <label for="textContent" class="form-label">Enter Description: </label><br>
+            <textarea id="textContent" name="post[textContent]" rows="5" cols="50" required></textarea>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-success">Post</button>
+        </div>
+    </form>
+</div>

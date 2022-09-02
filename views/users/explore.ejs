@@ -1,0 +1,16 @@
+<% layout('layouts/main')%>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="card-title"><%= user.username %></h3>
+            <h6 class="card-text text-muted"><%= user.email %></h6>
+            <h6 class="card-text">Friends:</h6>
+            <% for (let friend of friends) { %>
+                <%= friend.username %> 
+            <% } %>  
+        </div>
+        <div class="card-text">
+            <form action="/profile/<%= user._id %>/send?_method=PUT" method="POST">
+                <button class="btn btn-safe">Connect</button>
+            </form>
+        </div>
+    </div>

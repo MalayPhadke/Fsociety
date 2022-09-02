@@ -1,0 +1,20 @@
+GET /  (landingPage showing loginForm)
+GET /register done
+GET /profile done
+PUT /profile
+GET /explore done
+GET /society/new done
+POST /society/new done
+GET /:societyName done
+PUT /:societyName 
+DELETE /:societyName
+POST /:societyName/join done
+POST /:societyName/leave done 
+GET /:societyName/share
+POST /:societyName/share
+GET /:societyName/post/:postName done
+PUT /:societyName/post/:postId
+DELETE /:societyName/post/:postId
+GET /:societyName/:postId/comment/new
+POST /:societyName/:postId/comment/new
+GET /:societyName/:postId/comment/:commentID
